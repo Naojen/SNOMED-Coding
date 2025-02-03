@@ -79,8 +79,11 @@ Once the model is running, you can proceed with SNOMED coding for morphology and
 
 # Enhanced Retrieval Augmented Generation (ERAG)
 This approach is designed to complement PRW when users need to work with smaller LLMs that have a token limit of less than 4096, ensuring efficient processing without compromising coding accuracy. The working of ERAG is shown in the Figure.
-![screenshot](ERAG.png)
+<p align="center">
+  <img src="ERAG.png" alt="ERAG based SNOMED coding" width="500">
+</p>
 <p align="center"><em> ERAG based SNOMED coding </em></p>
+
 
 ### Building the Docker Container
 Build the docker container using the dockerfile in /ERAG/Dockerfile. and build the image 
