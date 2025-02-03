@@ -50,16 +50,19 @@ To deploy Ollama efficiently, use the following Docker command to run the contai
 ```bash
 docker run -d --gpus '"device=7"' -v ollama:/root/.ollama -p 11434:11434 --name PRW_ollama ollama/ollama
 ```
-### Understanding the Command
+#### Understanding the Command
 ``--gpus '"device=7"'`` → Assigns GPU device 7 for Ollama, optimizing performance.
 ``-v ollama:/root/.ollama ``→ Creates and mounts a persistent volume (ollama) for storing models and configurations.
 ``-p 11434:11434`` → Maps port 11434 between the host and container for API access.
 ``--name PRW_ollama`` → Names the container "PRW_ollama" for easy reference.
 ``ollama/ollama`` → Specifies the Ollama Docker image to be used.
 
-
-
-
+## **Running the Docker Container**
+Once the Ollama container is successfully running, you can execute LLaMa models inside it. The following command allows you to run different LLaMa models within the container:
+```bash
+docker exec -it ollama ollama run <model_name>
+```
+For this study, we use the following LLaMa models in Ollama: ``llama2 ``, ``llama3``, ``llama2:13b``, ``llama2:70b``, ``llama3:70b``, ``llama3.1:8b``, ``llama3.1:70b``, ``llama3.1:405``. You can replace <model_name> in the command above with any of these models to run it inside the container.
 
 
 
