@@ -10,7 +10,7 @@ To obtain the model weights and tokenizer, visit the **Meta website** and agree 
 ```
 Note: The download links are valid for 24 hours and have a limited number of downloads. If you encounter errors such as 403: Forbidden, re-request a fresh link from Meta.
 
-### Setting Up the Docker Container for PRW
+#### Setting Up the Docker Container for PRW
 
 Once the models are downloaded, you can proceed with setting up a **Docker container for PRW**. The `Dockerfile` is provided in: PRW_Meta/Dockerfile
 
@@ -20,13 +20,13 @@ To optimize memory usage, **move the downloaded model and tokenizer** to a separ
 
 ---
 
-### **Building the Docker Container**
+#### **Building the Docker Container**
 To build the container, navigate to the directory containing the `Dockerfile` and run:
 
 ```bash
 docker build -t PRW .
 ```
-### **Running the Docker Container**
+#### **Running the Docker Container**
 Run the container while dynamically mounting the model and tokenizer using the -v flag:
 
 ```bash
