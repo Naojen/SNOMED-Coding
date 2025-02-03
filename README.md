@@ -1,10 +1,10 @@
-This repository comprises the  SNOMED CT(Systematized Nomenclature of Medicine Clinical Terms) coding of colon pathology reports through prompt engineering (PRW) and Enhanced-Retrieval Augmented Generation (ERAG). This study evaluated PRW and ERAG through multiple LLMs provided by Meta-Llama 2, Llama 3 and Llama 3.1. The PRW consists of five phases
+This repository comprises the  SNOMED CT(Systematized Nomenclature of Medicine Clinical Terms) coding of colon pathology reports through Progressive Refinement Workflow (PRW) and Enhanced-Retrieval Augmented Generation (ERAG). ERAG is a complement module to PRW that utilised the refined prompts developed in PRW. The PRW consists of five phases
 ![screenshot](PRW_5_phases.png)
 <p align="center"><em>The development of five phases of PRW</em></p>
 The user prompts are developed through the five phases as shown in Figure. Each phase is developed based on addressing the error observed in the previous phase. So, in the last phase (<sup>5th</sup>), we have a comprehensive set of prompts that bring out the best of the LLama models in SNOMED coding.
 
 # Progressive Refinement Workflow (PRW)
-To ensure **maximum flexibility and accessibility**, SNOMED coding has been implemented using **two different approaches**, making it adaptable to **any type of system**, whether it has **high-end GPU resources** or requires **optimized deployment on limited hardware**. These two approaches are:
+The PRW framework evolved through five distinct phases, with each phase contributing to enhanced performance, ultimately leading to comprehensive results in the final phase. Due to the structured and dense user instruction nature of PRW, it requires LLMs with a large token capacity (≥ 4096 tokens) to effectively process complete pathology reports and ensure accurate SNOMED coding. To ensure **maximum flexibility and accessibility**, SNOMED coding has been implemented using **two different approaches**, making it adaptable to **any type of system**, whether it has **high-end GPU resources** or requires **optimized deployment on limited hardware**. These two approaches are:
 
 - **Models provided by Meta** – Utilizes the full-scale, uncompressed LLaMa models directly from Meta for **maximum accuracy and computational power**.
 - **Deployment via Ollama** – Leverages **quantized and optimized** LLaMa models through Ollama for **efficient execution on lower-resource setups** while maintaining strong performance.
@@ -78,10 +78,23 @@ Once the model is running, you can proceed with SNOMED coding for morphology and
 <p align="center"><em> PRW (LLaMa models through Ollama) assigning SNOMED based morphology and topography for a given colon pathology report</em></p>
 
 # Enhanced Retrieval Augmented Generation (ERAG)
+This approach is designed to complement PRW when users need to work with smaller LLMs that have a token limit of less than 4096, ensuring efficient processing without compromising coding accuracy. The working of ERAG is shown in the Figure.
+![screenshot](ERAG.png)
+<p align="center"><em> ERAG based SNOMED coding </em></p>
 
-
-
-
-
+### Building the Docker Container
+Build the docker container using the dockerfile in /ERAG/Dockerfile. and build the image 
+```bash
+docker build -t Erag .
+```
+### Running the Docker Container
+```bash
+docker run --gpus '"device=7"' --network host -it \
+-v $(pwd):/app     -v /var/run/docker.sock:/var/run/docker.sock \
+-v $(which docker):/usr/bin/docker    \
+--name PRW_RAG Erag   \
+python3 /app/RAG_ollama.py
+```
+``--network host`` allows the container to use the host’s network directly, eliminating the need for manual port mapping. It ensures low-latency communication between the PRW RAG container and the container where LLaMa is running, making interactions faster and more efficient. ``-v /var/run/docker.sock:/var/run/docker.sock``  mounts the host’s Docker socket inside the container, allowing the container to interact with and control other running Docker containers. It enables PRW_RAG to execute commands within the container where LLaMa is running, facilitating seamless model invocation without requiring external API calls. ``-v $(which docker):/usr/bin/docker`` mounts the Docker CLI inside PRW_RAG, ensuring it can run Docker commands without installing Docker within the container.
 
 
