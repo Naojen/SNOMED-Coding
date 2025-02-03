@@ -41,6 +41,28 @@ Once the docker starts running, you will see an interactive mode of PRW as shown
 ![screenshot](PRW_demo.png)
 <p align="center"><em> PRW assigning SNOMED based morphology and topography for a given colon pathology report</em></p>
 
+# SNOMED Coding through LLaMa models provided by Ollama
+
+Ollama is a powerful framework designed to simplify the deployment and interaction with Large Language Models (LLMs) on local machines. It provides an efficient way to run and manage models without requiring complex cloud-based infrastructure or high-performance local GPUs. This is achieved through optimized quantized models such as GGUF-based LLaMa 2, LLaMa 3, Mistral, and Gemma, which significantly reduce memory requirements while maintaining high performance. For this work, we integrate Ollama’s LLaMa models as an alternative option to perform SNOMED coding for pathology reports, ensuring flexibility and scalability across different computing setups. To enable this, we need to set up Ollama in a Docker container with GPU support.
+
+## Setting Up Ollama in a Docker Container
+To deploy Ollama efficiently, use the following Docker command to run the container with GPU acceleration
+```bash
+docker run -d --gpus '"device=7"' -v ollama:/root/.ollama -p 11434:11434 --name PRW_ollama ollama/ollama
+```
+### Understanding the Command
+``--gpus '"device=7"'`` → Assigns GPU device 7 for Ollama, optimizing performance.
+``-v ollama:/root/.ollama ``→ Creates and mounts a persistent volume (ollama) for storing models and configurations.
+``-p 11434:11434`` → Maps port 11434 between the host and container for API access.
+``--name PRW_ollama`` → Names the container "PRW_ollama" for easy reference.
+``ollama/ollama`` → Specifies the Ollama Docker image to be used.
+
+
+
+
+
+
+
 
 
 
