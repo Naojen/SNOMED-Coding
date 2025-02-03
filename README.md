@@ -7,6 +7,7 @@ The user prompts are developed through the five phases as shown in Figure. Each 
 To obtain the model weights and tokenizer, visit the **Meta website** and agree to their license terms. Once your request is approved, Meta will send you a signed URL via email. Use this URL when prompted while executing the download script to begin the download. Ensure that `wget` and `md5sum` are installed on your system. Then, run the following command:
 ```bash
 ./download.sh
+```
 Note: The download links are valid for 24 hours and have a limited number of downloads. If you encounter errors such as 403: Forbidden, re-request a fresh link from Meta.
 
 ### Setting Up the Docker Container for PRW
