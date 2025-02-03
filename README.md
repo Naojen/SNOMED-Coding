@@ -66,7 +66,7 @@ For this study, we use the following LLaMa models in Ollama: ``llama2 ``, ``llam
 
 ## Starting SNOMED Coding Using Ollama
 Once the model is running, you can proceed with SNOMED coding for morphology and topography of colon pathology reports. Execute the script Python PRW_ollama/SNOMED_coding_ollama.py
-![screenshot](PRW__ollama.png)
+![screenshot](PRW_ollama.png)
 <p align="center"><em> PRW (LLaMa models through Ollama) assigning SNOMED based morphology and topography for a given colon pathology report</em></p>
 
 
