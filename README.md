@@ -36,7 +36,9 @@ docker run --gpus '"device=6,7"' --rm -it \
 ```
 Replace /`` `/data/Jennil/llama3/llama3/Meta-Llama-3-8B-Instruct/` `` with the actual path where the model and tokenizer are stored. This approach ensures efficient memory usage while keeping the Docker container lightweight.
 
-
+Once the docker starts running, you will see an interactive mode of PRW as shown in Figure:
+![screenshot](demo_PRW.png)
+<p align="center"><em> PRW assigning SNOMED based morphology and topography for a given colon pathology report</em></p>
 
 
 
