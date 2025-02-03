@@ -35,11 +35,11 @@ docker run --gpus '"device=6,7"' --rm -it \
     -v /data/Jennil/llama3/llama3/Meta-Llama-3-8B-Instruct/:/mnt/model \
     PRW
 ```
-Replace /`` `/data/Jennil/llama3/llama3/Meta-Llama-3-8B-Instruct/` `` with the actual path where the model and tokenizer are stored. This approach ensures efficient memory usage while keeping the Docker container lightweight.
+Replace `` `/data/Jennil/llama3/llama3/Meta-Llama-3-8B-Instruct/` `` with the actual path where the model and tokenizer are stored. This approach ensures efficient memory usage while keeping the Docker container lightweight.
 
 Once the docker starts running, you will see an interactive mode of PRW as shown in Figure:
 ![screenshot](PRW_demo.png)
-<p align="center"><em> PRW assigning SNOMED based morphology and topography for a given colon pathology report</em></p>
+<p align="center"><em> PRW (LLaMa models through Meta) assigning SNOMED based morphology and topography for a given colon pathology report</em></p>
 
 # SNOMED Coding through LLaMa models provided by Ollama
 
@@ -60,9 +60,14 @@ docker run -d --gpus '"device=7"' -v ollama:/root/.ollama -p 11434:11434 --name 
 ## **Running the Docker Container**
 Once the Ollama container is successfully running, you can execute LLaMa models inside it. The following command allows you to run different LLaMa models within the container:
 ```bash
-docker exec -it ollama ollama run <model_name>
+docker exec -it PRW_ollama ollama run <model_name>
 ```
 For this study, we use the following LLaMa models in Ollama: ``llama2 ``, ``llama3``, ``llama2:13b``, ``llama2:70b``, ``llama3:70b``, ``llama3.1:8b``, ``llama3.1:70b``, ``llama3.1:405``. You can replace <model_name> in the command above with any of these models to run it inside the container.
+
+## Starting SNOMED Coding Using Ollama
+Once the model is running, you can proceed with SNOMED coding for morphology and topography of colon pathology reports. Execute the script Python PRW_ollama/SNOMED_coding_ollama.py
+![screenshot](PRW__ollama_demo.png)
+<p align="center"><em> PRW (LLaMa models through Ollama) assigning SNOMED based morphology and topography for a given colon pathology report</em></p>
 
 
 
