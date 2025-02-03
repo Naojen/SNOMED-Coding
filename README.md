@@ -1,5 +1,5 @@
 This repository comprises the  SNOMED CT(Systematized Nomenclature of Medicine Clinical Terms) coding of colon pathology reports through Progressive Refinement Workflow (PRW) and Enhanced-Retrieval Augmented Generation (ERAG). ERAG is a complement module to PRW that utilised the refined prompts developed in PRW. The PRW consists of five phases
-![screenshot](PRW_5_phases.png)
+![screenshot](Images/PRW_5_phases.png)
 <p align="center"><em>The development of five phases of PRW</em></p>
 The user prompts are developed through the five phases as shown in Figure. Each phase is developed based on addressing the error observed in the previous phase. So, in the last phase (<sup>5th</sup>), we have a comprehensive set of prompts that bring out the best of the LLama models in SNOMED coding.
 
@@ -46,7 +46,7 @@ docker run --gpus '"device=6,7"' --rm -it \
 Replace `` `/data/Jennil/llama3/llama3/Meta-Llama-3-8B-Instruct/` `` with the actual path where the model and tokenizer are stored. This approach ensures efficient memory usage while keeping the Docker container lightweight.
 
 Once the docker starts running, you will see an interactive mode of PRW as shown in Figure:
-![screenshot](PRW_demo.png)
+![screenshot](Images/PRW_demo.png)
 <p align="center"><em> PRW (LLaMa models through Meta) assigning SNOMED based morphology and topography for a given colon pathology report</em></p>
 
 ## SNOMED Coding with LLaMa models deployed via Ollama
@@ -74,13 +74,13 @@ For this study, we use the following LLaMa models in Ollama: ``llama2 ``, ``llam
 
 ### Starting SNOMED Coding Using Ollama
 Once the model is running, you can proceed with SNOMED coding for morphology and topography of colon pathology reports. Execute the script Python PRW_ollama/SNOMED_coding_ollama.py
-![screenshot](PRW_ollama.png)
+![screenshot](Images/PRW_ollama.png)
 <p align="center"><em> PRW (LLaMa models through Ollama) assigning SNOMED based morphology and topography for a given colon pathology report</em></p>
 
 # Enhanced Retrieval Augmented Generation (ERAG)
 This approach is designed to complement PRW when users need to work with smaller LLMs that have a token limit of less than 4096, ensuring efficient processing without compromising coding accuracy. The working of ERAG is shown in the Figure.
 <p align="center">
-  <img src="ERAG.png" alt="ERAG based SNOMED coding" width="500">
+  <img src="Images/ERAG.png" alt="ERAG based SNOMED coding" width="500">
 </p>
 <p align="center"><em> ERAG based SNOMED coding </em></p>
 
