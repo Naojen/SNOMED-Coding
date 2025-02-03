@@ -25,15 +25,16 @@ To build the container, navigate to the directory containing the `Dockerfile` an
 
 ```bash
 docker build -t PRW .
-
-Running the Docker Container
+```
+### **Running the Docker Container**
 Run the container while dynamically mounting the model and tokenizer using the -v flag:
 
 ```bash
 docker run --gpus '"device=6,7"' --rm -it \
     -v /data/Jennil/llama3/llama3/Meta-Llama-3-8B-Instruct/:/mnt/model \
     PRW
-Replace /data/Jennil/llama3/llama3/Meta-Llama-3-8B-Instruct/ with the actual path where the model and tokenizer are stored. This approach ensures efficient memory usage while keeping the Docker container lightweight.
+```
+Replace /`` `/data/Jennil/llama3/llama3/Meta-Llama-3-8B-Instruct/` `` with the actual path where the model and tokenizer are stored. This approach ensures efficient memory usage while keeping the Docker container lightweight.
 
 
 
