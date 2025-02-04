@@ -101,6 +101,6 @@ python3 /app/RAG_ollama.py
 ``--network host`` allows the container to use the host’s network directly, eliminating the need for manual port mapping. It ensures low-latency communication between the PRW RAG container and the container where LLaMa is running, making interactions faster and more efficient. ``-v /var/run/docker.sock:/var/run/docker.sock``  mounts the host’s Docker socket inside the container, allowing the container to interact with and control other running Docker containers. It enables PRW_RAG to execute commands within the container where LLaMa is running, facilitating seamless model invocation without requiring external API calls. ``-v $(which docker):/usr/bin/docker`` mounts the Docker CLI inside PRW_RAG, ensuring it can run Docker commands without installing Docker within the container.
 
 The response of ERAG is provided in the following figure. From the figure it can seen that the LLM has been called multiple times to assign appropriate SNOMED codes for the given pahtology report.
-![screenshot](Images/ERAG_ollama.png)
+![screenshot](Images/ERAG_Ollama.png)
 <p align="center"><em> Step-wise response of ERAG for a given pathology report </em></p>
 
