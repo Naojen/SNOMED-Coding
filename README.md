@@ -87,6 +87,7 @@ This approach is designed to complement PRW when users need to work with smaller
 In the same manner as PRW, this approach is also handled in two ways divided by  the nature of the LlaMa models:  models provided by Meta, and  models deployed via Ollama
 
 ## ERAG-based SNOMED Coding with models deployed via Ollama
+Its components are presented in /ERAG/RAG_Ollama. 
 ### Building the Docker Container
 Build the docker container using the dockerfile in /ERAG/Dockerfile. and build the image 
 ```bash
@@ -107,4 +108,4 @@ The response of ERAG is provided in the following figure. From the figure it can
 <p align="center"><em> Step-wise response of ERAG for a given pathology report </em></p>
 
 ## ERAG-based SNOMED Coding with models provided by Meta
-This is the same as PRW where LLama models are deployed directly from the meta website. The docker file  and its script are provided in /RAG_meta. 
+This is the same as PRW where LLama models are deployed directly from the meta website. The docker file  and script are provided in /ERAG/RAG_meta/. 
