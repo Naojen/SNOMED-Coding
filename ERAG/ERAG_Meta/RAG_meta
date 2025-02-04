@@ -1,0 +1,175 @@
+import os
+import gc
+import time
+import subprocess
+import pandas as pd
+from langchain_community.document_loaders import CSVLoader
+from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain_community.vectorstores import FAISS
+from langchain_community.embeddings import HuggingFaceEmbeddings
+import faiss
+import numpy as np
+from langchain_community.docstore.in_memory import InMemoryDocstore
+from llama import Llama  # Import Meta's LLaMa
+
+# 🛠️ Load Meta’s LLaMa model (instead of Ollama)
+ckpt_dir = "/mnt/model"  # The model directory from Docker mount
+tokenizer_path = "/mnt/model/tokenizer.model"  # Path to tokenizer
+
+generator = Llama.build(
+    ckpt_dir=ckpt_dir,
+    tokenizer_path=tokenizer_path,
+    max_seq_len=8192,
+    max_batch_size=4,
+)
+print("✅ Meta's LLaMa Model Loaded Successfully")
+
+# 🏥 Instructions for LLaMa processing
+summarization_instructions = """
+You are a highly skilled pathologist assistant tasked with accurately identifying the morphology and topography of the primary tumor. Find the morphology and topography of the most serious tumor.
+"""
+
+morphology_extraction_instructions = """
+From the summarized pathology report, extract **only the morphology** of the tumor. Do not give other informaiton. Keep it in one sentence.
+Return just the morphology term. Keep it in one sentence
+"""
+
+topography_extraction_instructions = """
+From the summarized pathology report, extract **only the topography** of the tumor. Do not give other informaiton
+Return only the topography term. If the location is explictily mention give that only and no other informaiotn such as distances.
+"""
+
+final_morphology_selection_instructions = """
+You are an expert in pathology coding. Your task is to analyze the extracted **morphology description** of a tumor and compare it with three possible SNOMED morphology codes and return the best one.
+Only return your answer in this format:
+The morphology is <Morphology> and its SNOMED Code is <BEST_MCODE>
+"""
+
+final_topography_selection_instructions = """
+You are an expert in pathology coding. Your task is to analyze the extracted **topography location** of a tumor and compare it with three possible SNOMED topography codes and return the best one.
+Only return your answer in this format:
+The Topography is <Topography> and its SNOMED Code is <BEST_TCODE>
+"""
+
+# 🛠️ Normalize embeddings for cosine similarity
+def normalize_embeddings(vectors):
+    return vectors / np.linalg.norm(vectors, axis=1, keepdims=True)
+
+# 🛠️ Load CSV files into FAISS
+def load_and_index_csv(csv_path):
+    """Load SNOMED CSV and index it using FAISS for similarity search."""
+    loader = CSVLoader(file_path=csv_path)
+    documents = loader.load()
+
+    text_splitter = RecursiveCharacterTextSplitter(chunk_size=512, chunk_overlap=50)
+    chunks = text_splitter.split_documents(documents)
+
+    embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
+
+    # Use FAISS properly with LangChain
+    vectorstore = FAISS.from_documents(chunks, embeddings)
+    
+    return vectorstore
+
+# 🏥 Load FAISS databases for RAG
+topography_vectorstore = load_and_index_csv("Topography_SNOMED.csv")
+morphology_vectorstore = load_and_index_csv("Morphology_SNOMED.csv")
+
+# 🛠️ Call Meta's LLaMa (Replacing Docker Calls)
+def call_llama(content, instructions):
+    """Run Meta's LLaMa model directly (Replaces Docker subprocess calls)"""
+    complete_prompt = f"{instructions}\n{content}\n"
+
+    dialog = [
+        {"role": "system", "content": instructions},
+        {"role": "user", "content": content},
+    ]
+
+    response = generator.chat_completion(
+        [dialog],
+        max_gen_len=512,  # Control max output length
+        temperature=0.7,
+        top_p=0.9,
+    )
+
+    return response[0]["generation"]["content"].strip()
+
+# 🛠️ RAG Query for Topography and Morphology
+def rag_query(query, vectorstore):
+    retriever = vectorstore.as_retriever(search_kwargs={"k": 3})  # Retrieve top 3 results
+    retrieved_docs = retriever.invoke(query)
+    context = "\n".join([doc.page_content for doc in retrieved_docs])
+    return context
+
+# 🛠️ Validate and Finalize SNOMED Codes using LLaMa
+def validate_topography_code(extracted_topography, retrieved_topography_codes):
+    """Pass extracted topography and three retrieved SNOMED topography codes to LLaMa for final selection."""
+    validation_prompt = f"""
+    Extracted Topography: {extracted_topography}
+
+    Possible SNOMED Topography Codes:
+    {retrieved_topography_codes}
+
+    {final_topography_selection_instructions}
+    """
+    return call_llama(validation_prompt, final_topography_selection_instructions)
+
+def validate_morphology_code(extracted_morphology, retrieved_morphology_codes):
+    """Pass extracted morphology and three retrieved SNOMED morphology codes to LLaMa for final selection."""
+    validation_prompt = f"""
+    Extracted Morphology: {extracted_morphology}
+
+    Possible SNOMED Morphology Codes:
+    {retrieved_morphology_codes}
+
+    {final_morphology_selection_instructions}
+    """
+    return call_llama(validation_prompt, final_morphology_selection_instructions)
+    
+# 🏥 Main processing function
+def main():
+    while True:
+        print("\nEnter your pathology report (or type 'exit' to quit):")
+        user_input = input("> ").strip()
+
+        if user_input.lower() == "exit":
+            print("Exiting the program.")
+            break
+
+        #  Step 1: Summarization
+        print("\nProcessing Summarization...")
+        summary = call_llama(user_input, summarization_instructions)
+        print("\nSummary:\n", summary)
+
+        #  Step 2: Extract Morphology from Summary
+        morphology_text = call_llama(summary, morphology_extraction_instructions)
+        print("\nExtracted Morphology:\n", morphology_text)
+
+        #  Step 3: Extract Topography from Summary
+        topography_text = call_llama(summary, topography_extraction_instructions)
+        print("\nExtracted Topography:\n", topography_text)
+
+        #  Step 4: Retrieve Topography Code using RAG
+        print("\nFinding candidate Topography Codes using RAG...")
+        topography_result = rag_query(topography_text, topography_vectorstore)
+        print("\nTopography Code retrieved:\n", topography_result)
+
+        #  Step 5: Retrieve Morphology Code using RAG
+        print("\nFinding candidates Morphology Codes using RAG...")
+        morphology_result = rag_query(morphology_text, morphology_vectorstore)
+        print("\nMorphology Code Retrieved:\n", morphology_result)
+        
+        #  Step 6: Finalize the Best Topography Code
+        final_topography_code = validate_topography_code(topography_text, topography_result)
+        print("\nFinal Topography Code:\n", final_topography_code)
+
+        #  Step 7: Finalize the Best Morphology Code
+        final_morphology_code = validate_morphology_code(morphology_text, morphology_result)
+        print("\nFinal Morphology Code:\n", final_morphology_code)
+
+        #  Free memory
+        gc.collect()
+        time.sleep(1)
+
+if __name__ == "__main__":
+    main()
