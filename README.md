@@ -4,7 +4,7 @@ This repository comprises the  SNOMED CT(Systematized Nomenclature of Medicine C
 The user prompts are developed through the five phases as shown in the Figure. Each phase is developed based on addressing the error observed in the previous phase. So, in the last phase (<sup>5th</sup>), we have a comprehensive set of prompts that bring out the best of the LLaMa models in SNOMED coding.
 
 # PRAISE (A Prompting-RAG Approach for Intelligent SNOMED Encoding Using Large Language Models)
-The PRW framework evolved through five distinct phases, with each phase contributing to enhanced performance, ultimately leading to comprehensive results in the final phase. Due to the structured and dense user instruction nature of PRW, it requires LLMs with a large token capacity (≥ 4096 tokens) to effectively process complete pathology reports and ensure accurate SNOMED coding. To ensure **maximum flexibility and accessibility**, SNOMED coding has been implemented using **two different approaches**, making it adaptable to **any type of system**, whether it has **high-end GPU resources** or requires **optimized deployment on limited hardware**. These two approaches are:
+The PRAISE framework evolved through five distinct phases, with each phase contributing to enhanced performance, ultimately leading to comprehensive results in the final phase. Due to the structured and dense user instruction nature of PRAISE, it requires LLMs with a large token capacity (≥ 4096 tokens) to effectively process complete pathology reports and ensure accurate SNOMED coding. To ensure **maximum flexibility and accessibility**, SNOMED coding has been implemented using **two different approaches**, making it adaptable to **any type of system**, whether it has **high-end GPU resources** or requires **optimized deployment on limited hardware**. These two approaches are:
 
 - **Models provided by Meta** – Utilizes the full-scale, uncompressed LLaMa models directly from Meta for **maximum accuracy and computational power**.
 - **Deployment via Ollama** – Leverages **quantized and optimized** LLaMa models through Ollama for **efficient execution on lower-resource setups** while maintaining strong performance.
@@ -21,7 +21,7 @@ To obtain the model weights and tokenizer, visit the **Meta website** and agree 
 Note: The download links are valid for 24 hours and have a limited number of downloads. If you encounter errors such as 403: Forbidden, re-request a fresh link from Meta.
 
 ### Setting Up the Docker Container
-Once the models are downloaded, you can proceed with setting up a **Docker container for PRW**. The `Dockerfile` is provided in: PRW_Meta/Dockerfile
+Once the models are downloaded, you can proceed with setting up a **Docker container for PRAISE**. The `Dockerfile` is provided in: PRW_Meta/Dockerfile
 
 
 ### Managing Model Files Efficiently
@@ -47,7 +47,7 @@ Replace `` `/data/Jennil/llama3/llama3/Meta-Llama-3-8B-Instruct/` `` with the ac
 
 Once the docker starts running, you will see an interactive mode of PRAISE as shown in Figure:
 ![screenshot](Images/PRW_demo.png)
-<p align="center"><em> PRW (LLaMa models through Meta) assigning SNOMED based morphology and topography for a given colon pathology report</em></p>
+<p align="center"><em> PRAISE (LLaMa models through Meta) assigning SNOMED based morphology and topography for a given colon pathology report</em></p>
 
 ## SNOMED Coding with LLaMa models deployed via Ollama
 
@@ -108,4 +108,4 @@ The response of ERAG is provided in the following figure. From the figure it can
 <p align="center"><em> Step-wise response of ERAG for a given pathology report </em></p>
 
 ## ERAG-based SNOMED Coding with models provided by Meta
-This is the same as PRW where LLama models are deployed directly from the meta website. The docker file  and script are provided in /ERAG/RAG_meta/. 
+This is the same as PRAISE where LLama models are deployed directly from the meta website. The docker file  and script are provided in /ERAG/RAG_meta/. 
