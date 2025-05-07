@@ -1,9 +1,9 @@
-This repository comprises the  SNOMED CT(Systematized Nomenclature of Medicine Clinical Terms) coding of colon pathology reports through Progressive Refinement Workflow (PRW) and Enhanced-Retrieval Augmented Generation (ERAG). ERAG is a complement module to PRW that utilised the refined prompts developed in PRW. The PRW consists of five phases
+This repository comprises the  SNOMED CT(Systematized Nomenclature of Medicine Clinical Terms) coding of colon pathology reports through PRAISE (A Prompting-RAG Approach for Intelligent SNOMED Encoding Using Large Language Models).
 ![screenshot](Images/PRW_5_phases.png)
-<p align="center"><em>The development of five phases of PRW</em></p>
-The user prompts are developed through the five phases as shown in Figure. Each phase is developed based on addressing the error observed in the previous phase. So, in the last phase (<sup>5th</sup>), we have a comprehensive set of prompts that bring out the best of the LLama models in SNOMED coding.
+<p align="center"><em>The development of five phases of PRAISE</em></p>
+The user prompts are developed through the five phases as shown in the Figure. Each phase is developed based on addressing the error observed in the previous phase. So, in the last phase (<sup>5th</sup>), we have a comprehensive set of prompts that bring out the best of the LLaMa models in SNOMED coding.
 
-# Progressive Refinement Workflow (PRW)
+# PRAISE (A Prompting-RAG Approach for Intelligent SNOMED Encoding Using Large Language Models)
 The PRW framework evolved through five distinct phases, with each phase contributing to enhanced performance, ultimately leading to comprehensive results in the final phase. Due to the structured and dense user instruction nature of PRW, it requires LLMs with a large token capacity (≥ 4096 tokens) to effectively process complete pathology reports and ensure accurate SNOMED coding. To ensure **maximum flexibility and accessibility**, SNOMED coding has been implemented using **two different approaches**, making it adaptable to **any type of system**, whether it has **high-end GPU resources** or requires **optimized deployment on limited hardware**. These two approaches are:
 
 - **Models provided by Meta** – Utilizes the full-scale, uncompressed LLaMa models directly from Meta for **maximum accuracy and computational power**.
@@ -45,7 +45,7 @@ docker run --gpus '"device=6,7"' --rm -it \
 ```
 Replace `` `/data/Jennil/llama3/llama3/Meta-Llama-3-8B-Instruct/` `` with the actual path where the model and tokenizer are stored. This approach ensures efficient memory usage while keeping the Docker container lightweight.
 
-Once the docker starts running, you will see an interactive mode of PRW as shown in Figure:
+Once the docker starts running, you will see an interactive mode of PRAISE as shown in Figure:
 ![screenshot](Images/PRW_demo.png)
 <p align="center"><em> PRW (LLaMa models through Meta) assigning SNOMED based morphology and topography for a given colon pathology report</em></p>
 
@@ -77,14 +77,14 @@ Once the model is running, you can proceed with SNOMED coding for morphology and
 ![screenshot](Images/PRW_ollama.png)
 <p align="center"><em> PRW (LLaMa models through Ollama) assigning SNOMED based morphology and topography for a given colon pathology report</em></p>
 
-# Enhanced Retrieval Augmented Generation (ERAG)
-This approach is designed to complement PRW when users need to work with smaller LLMs that have a token limit of less than 4096, ensuring efficient processing without compromising coding accuracy. The working of ERAG is shown in the Figure.
+# PRAISE-ERAG
+This approach is designed to complement PRAISE when users need to work with smaller LLMs that have a token limit of less than 4096, ensuring efficient processing without compromising coding accuracy. The working of ERAG is shown in the Figure.
 <p align="center">
   <img src="Images/ERAG.png" alt="ERAG based SNOMED coding" width="500">
 </p>
 <p align="center"><em> ERAG based SNOMED coding </em></p>
 
-In the same manner as PRW, this approach is also handled in two ways divided by  the nature of the LlaMa models:  models provided by Meta, and  models deployed via Ollama
+In the same manner as PRAISE, this approach is also handled in two ways, divided by  the nature of the LlaMa models:  models provided by Meta, and  models deployed via Ollama
 
 ## ERAG-based SNOMED Coding with models deployed via Ollama
 Its components are presented in /ERAG/RAG_Ollama. 
@@ -101,7 +101,7 @@ docker run --gpus '"device=7"' --network host -it \
 --name PRW_RAG Erag   \
 python3 /app/RAG_ollama.py
 ```
-``--network host`` allows the container to use the host’s network directly, eliminating the need for manual port mapping. It ensures low-latency communication between the PRW RAG container and the container where LLaMa is running, making interactions faster and more efficient. ``-v /var/run/docker.sock:/var/run/docker.sock``  mounts the host’s Docker socket inside the container, allowing the container to interact with and control other running Docker containers. It enables PRW_RAG to execute commands within the container where LLaMa is running, facilitating seamless model invocation without requiring external API calls. ``-v $(which docker):/usr/bin/docker`` mounts the Docker CLI inside PRW_RAG, ensuring it can run Docker commands without installing Docker within the container.
+``--network host`` allows the container to use the host’s network directly, eliminating the need for manual port mapping. It ensures low-latency communication between the PRAISE-ERAG container and the container where LLaMa is running, making interactions faster and more efficient. ``-v /var/run/docker.sock:/var/run/docker.sock``  mounts the host’s Docker socket inside the container, allowing the container to interact with and control other running Docker containers. It enables PRW_RAG to execute commands within the container where LLaMa is running, facilitating seamless model invocation without requiring external API calls. ``-v $(which docker):/usr/bin/docker`` mounts the Docker CLI inside PRW_RAG, ensuring it can run Docker commands without installing Docker within the container.
 
 The response of ERAG is provided in the following figure. From the figure it can seen that the LLM has been called multiple times to assign appropriate SNOMED codes for the given pahtology report. 
 ![screenshot](Images/ERAG_Ollama.png)
