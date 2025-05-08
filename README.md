@@ -33,7 +33,7 @@ To optimize memory usage, **move the downloaded model and tokenizer** to a separ
 To build the container, navigate to the directory containing the `Dockerfile` and run:
 
 ```bash
-docker build -t PRW .
+docker build -t PRAISE .
 ```
 ### Running the Docker Container
 Run the container while dynamically mounting the model and tokenizer using the -v flag:
@@ -41,7 +41,7 @@ Run the container while dynamically mounting the model and tokenizer using the -
 ```bash
 docker run --gpus '"device=6,7"' --rm -it \
     -v /data/Jennil/llama3/llama3/Meta-Llama-3-8B-Instruct/:/mnt/model \
-    PRW
+    PRAISE
 ```
 Replace `` `/data/Jennil/llama3/llama3/Meta-Llama-3-8B-Instruct/` `` with the actual path where the model and tokenizer are stored. This approach ensures efficient memory usage while keeping the Docker container lightweight.
 
@@ -56,26 +56,26 @@ Ollama is a powerful framework designed to simplify the deployment and interacti
 ### Setting Up Ollama in a Docker Container
 To deploy Ollama efficiently, use the following Docker command to run the container with GPU acceleration
 ```bash
-docker run -d --gpus '"device=7"' -v ollama:/root/.ollama -p 11434:11434 --name PRW_ollama ollama/ollama
+docker run -d --gpus '"device=7"' -v ollama:/root/.ollama -p 11434:11434 --name PRAISE_ollama ollama/ollama
 ```
 #### Understanding the Command
 ``--gpus '"device=7"'`` → Assigns GPU device 7 for Ollama, optimizing performance.
 ``-v ollama:/root/.ollama ``→ Creates and mounts a persistent volume (ollama) for storing models and configurations.
 ``-p 11434:11434`` → Maps port 11434 between the host and container for API access.
-``--name PRW_ollama`` → Names the container "PRW_ollama" for easy reference.
+``--name PRAISE_ollama`` → Names the container "PRAISE_ollama" for easy reference.
 ``ollama/ollama`` → Specifies the Ollama Docker image to be used.
 
 ### Running the Docker Container
 Once the Ollama container is successfully running, you can execute LLaMa models inside it. The following command allows you to run different LLaMa models within the container:
 ```bash
-docker exec -it PRW_ollama ollama run <model_name>
+docker exec -it PRAISE_ollama ollama run <model_name>
 ```
 For this study, we use the following LLaMa models in Ollama: ``llama2 ``, ``llama3``, ``llama2:13b``, ``llama2:70b``, ``llama3:70b``, ``llama3.1:8b``, ``llama3.1:70b``, ``llama3.1:405``. You can replace <model_name> in the command above with any of these models to run it inside the container.
 
 ### Starting SNOMED Coding Using Ollama
-Once the model is running, you can proceed with SNOMED coding for morphology and topography of colon pathology reports. Execute the script Python PRW_ollama/SNOMED_coding_ollama.py
+Once the model is running, you can proceed with SNOMED coding for morphology and topography of colon pathology reports. Execute the script Python PRAISE_ollama/SNOMED_coding_ollama.py
 ![screenshot](Images/PRW_ollama.png)
-<p align="center"><em> PRW (LLaMa models through Ollama) assigning SNOMED based morphology and topography for a given colon pathology report</em></p>
+<p align="center"><em> PRAISE (LLaMa models through Ollama) assigning SNOMED based morphology and topography for a given colon pathology report</em></p>
 
 # PRAISE-ERAG
 This approach is designed to complement PRAISE when users need to work with smaller LLMs that have a token limit of less than 4096, ensuring efficient processing without compromising coding accuracy. The working of ERAG is shown in the Figure.
@@ -98,12 +98,12 @@ docker build -t Erag .
 docker run --gpus '"device=7"' --network host -it \
 -v $(pwd):/app     -v /var/run/docker.sock:/var/run/docker.sock \
 -v $(which docker):/usr/bin/docker    \
---name PRW_RAG Erag   \
+--name PRAISE_RAG Erag   \
 python3 /app/RAG_ollama.py
 ```
-``--network host`` allows the container to use the host’s network directly, eliminating the need for manual port mapping. It ensures low-latency communication between the PRAISE-ERAG container and the container where LLaMa is running, making interactions faster and more efficient. ``-v /var/run/docker.sock:/var/run/docker.sock``  mounts the host’s Docker socket inside the container, allowing the container to interact with and control other running Docker containers. It enables PRW_RAG to execute commands within the container where LLaMa is running, facilitating seamless model invocation without requiring external API calls. ``-v $(which docker):/usr/bin/docker`` mounts the Docker CLI inside PRW_RAG, ensuring it can run Docker commands without installing Docker within the container.
+``--network host`` allows the container to use the host’s network directly, eliminating the need for manual port mapping. It ensures low-latency communication between the PRAISE-ERAG container and the container where LLaMa is running, making interactions faster and more efficient. ``-v /var/run/docker.sock:/var/run/docker.sock``  mounts the host’s Docker socket inside the container, allowing the container to interact with and control other running Docker containers. It enables PRAISE_RAG to execute commands within the container where LLaMa is running, facilitating seamless model invocation without requiring external API calls. ``-v $(which docker):/usr/bin/docker`` mounts the Docker CLI inside PRAISE_RAG, ensuring it can run Docker commands without installing Docker within the container.
 
-The response of ERAG is provided in the following figure. From the figure it can seen that the LLM has been called multiple times to assign appropriate SNOMED codes for the given pahtology report. 
+The response of ERAG is provided in the following figure. From the figure, it can be seen that the LLM has been called multiple times to assign appropriate SNOMED codes for the given pahtology report. 
 ![screenshot](Images/ERAG_Ollama.png)
 <p align="center"><em> Step-wise response of ERAG for a given pathology report </em></p>
 
