@@ -22,7 +22,7 @@ generator = Llama.build(
     max_seq_len=8192,
     max_batch_size=4,
 )
-print("✅ Meta's LLaMa Model Loaded Successfully")
+print(" Meta's LLaMa Model Loaded Successfully")
 
 # 🏥 Instructions for LLaMa processing
 summarization_instructions = """
@@ -51,11 +51,11 @@ Only return your answer in this format:
 The Topography is <Topography> and its SNOMED Code is <BEST_TCODE>
 """
 
-# 🛠️ Normalize embeddings for cosine similarity
+#  Normalize embeddings for cosine similarity
 def normalize_embeddings(vectors):
     return vectors / np.linalg.norm(vectors, axis=1, keepdims=True)
 
-# 🛠️ Load CSV files into FAISS
+#  Load CSV files into FAISS
 def load_and_index_csv(csv_path):
     """Load SNOMED CSV and index it using FAISS for similarity search."""
     loader = CSVLoader(file_path=csv_path)
@@ -71,11 +71,11 @@ def load_and_index_csv(csv_path):
     
     return vectorstore
 
-# 🏥 Load FAISS databases for RAG
+#  Load FAISS databases for RAG
 topography_vectorstore = load_and_index_csv("Topography_SNOMED.csv")
 morphology_vectorstore = load_and_index_csv("Morphology_SNOMED.csv")
 
-# 🛠️ Call Meta's LLaMa (Replacing Docker Calls)
+#  Call Meta's LLaMa (Replacing Docker Calls)
 def call_llama(content, instructions):
     """Run Meta's LLaMa model directly (Replaces Docker subprocess calls)"""
     complete_prompt = f"{instructions}\n{content}\n"
@@ -94,14 +94,14 @@ def call_llama(content, instructions):
 
     return response[0]["generation"]["content"].strip()
 
-# 🛠️ RAG Query for Topography and Morphology
+#  RAG Query for Topography and Morphology
 def rag_query(query, vectorstore):
     retriever = vectorstore.as_retriever(search_kwargs={"k": 3})  # Retrieve top 3 results
     retrieved_docs = retriever.invoke(query)
     context = "\n".join([doc.page_content for doc in retrieved_docs])
     return context
 
-# 🛠️ Validate and Finalize SNOMED Codes using LLaMa
+#  Validate and Finalize SNOMED Codes using LLaMa
 def validate_topography_code(extracted_topography, retrieved_topography_codes):
     """Pass extracted topography and three retrieved SNOMED topography codes to LLaMa for final selection."""
     validation_prompt = f"""
@@ -126,7 +126,7 @@ def validate_morphology_code(extracted_morphology, retrieved_morphology_codes):
     """
     return call_llama(validation_prompt, final_morphology_selection_instructions)
     
-# 🏥 Main processing function
+#  Main processing function
 def main():
     while True:
         print("\nEnter your pathology report (or type 'exit' to quit):")
