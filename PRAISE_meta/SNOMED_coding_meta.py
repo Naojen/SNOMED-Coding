@@ -70,9 +70,7 @@ def assign_snomed(generator, summary: str, max_gen_len: Optional[int], temperatu
 	9. 67965	COLON, RIGHT
 	10. 67995	COLON, LEFT
 	11. 68000	RECTUM, NOS
-	13. 69000	ANUS, NOS
-	14. 69900	ANORECTUM, CS
-	15. 64000 	SMALL INTESTINE
+	12. 64000 	SMALL INTESTINE
 
 
 	Distance to Topography Mapping:
