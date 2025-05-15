@@ -10,11 +10,11 @@ from langchain_community.embeddings import HuggingFaceEmbeddings
 import faiss
 import numpy as np
 
-# 🛠️ Docker constants
+#  Docker constants
 CONTAINER_NAME = "PRW_ollama"  # Your Docker container name
 MODEL_NAME = "llama3.1:70b"  # LLaMa model inside Docker
 
-# 🏥 Instructions for LLaMa model processing
+#  Instructions for LLaMa model processing
 summarization_instructions = """
 You are a highly skilled pathologist assistant tasked with accurately identifying the morphology and topography of the primary tumor. 
 Tumor morphology refers to the histological classification of the tumor, while topography specifies the anatomical site of the tumor. 
@@ -32,7 +32,7 @@ topography_extraction_instructions = """
 From the summarized pathology report, extract **only the topography location** of the tumor.
 Return just the topography information, and nothing else.
 """
-# ✅ New structured prompts for selecting the final SNOMED code
+#  New structured prompts for selecting the final SNOMED code
 final_morphology_selection_instructions = """
 You are an expert in pathology coding. Your task is to analyze the extracted **morphology description** of a tumor and compare it with three possible SNOMED morphology codes. 
 Follow these steps:
@@ -57,11 +57,11 @@ Only return your answer in this format:
 The Topogrpahy is <Topography> and the its SNOMED Code is <BEST_TCODE>
 """
 
-# 🛠️ Normalize embeddings for cosine similarity
+#  Normalize embeddings for cosine similarity
 def normalize_embeddings(vectors):
     return vectors / np.linalg.norm(vectors, axis=1, keepdims=True)
 
-# 🛠️ Load CSV files into FAISS with Cosine Similarity
+#  Load CSV files into FAISS with Cosine Similarity
 def load_and_index_csv(csv_path):
     """Load SNOMED CSV and index it using FAISS for similarity search."""
     loader = CSVLoader(file_path=csv_path)
@@ -80,11 +80,11 @@ def load_and_index_csv(csv_path):
 
 
 
-# 🏥 Load FAISS databases for RAG
+#  Load FAISS databases for RAG
 topography_vectorstore = load_and_index_csv("Topography_SNOMED.csv")
 morphology_vectorstore = load_and_index_csv("Morphology_SNOMED.csv")
 
-# 🛠️ Call LLaMa using subprocess inside Docker
+#  Call LLaMa using subprocess inside Docker
 def call_llama_subprocess(content, instructions):
     """Run LLaMa 3.1:70B inside Docker using subprocess"""
     complete_prompt = f"{instructions}\n{content}\n"
@@ -101,7 +101,7 @@ def call_llama_subprocess(content, instructions):
     except Exception as e:
         return str(e)
 
-# 🛠️ RAG Query for Topography and Morphology
+#  RAG Query for Topography and Morphology
 def rag_query(query, vectorstore):
     retriever = vectorstore.as_retriever(search_kwargs={"k": 3})  # Retrieve top 3 results
     retrieved_docs = retriever.invoke(query)
