@@ -12,7 +12,7 @@ import numpy as np
 from langchain_community.docstore.in_memory import InMemoryDocstore
 from llama import Llama  # Import Meta's LLaMa
 
-# 🛠️ Load Meta’s LLaMa model (instead of Ollama)
+#  Load Meta’s LLaMa model (instead of Ollama)
 ckpt_dir = "/mnt/model"  # The model directory from Docker mount
 tokenizer_path = "/mnt/model/tokenizer.model"  # Path to tokenizer
 
@@ -24,7 +24,7 @@ generator = Llama.build(
 )
 print(" Meta's LLaMa Model Loaded Successfully")
 
-# 🏥 Instructions for LLaMa processing
+#  Instructions for LLaMa processing
 summarization_instructions = """
 You are a highly skilled pathologist assistant tasked with accurately identifying the morphology and topography of the primary tumor. Find the morphology and topography of the most serious tumor.
 """
