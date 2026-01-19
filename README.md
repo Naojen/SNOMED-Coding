@@ -45,7 +45,7 @@ docker run --gpus '"device=6,7"' --rm -it \
 ```
 Replace `` `/data/Jennil/llama3/llama3/Meta-Llama-3-8B-Instruct/` `` with the actual path where the model and tokenizer are stored. This approach ensures efficient memory usage while keeping the Docker container lightweight.
 
-Once the docker starts running, you will see an interactive mode of PRAISE as shown in Figure:
+Once the docker starts running, you will see an interactive mode of PRISM as shown in Figure:
 ![screenshot](Images/PRW_demo.png)
 <p align="center"><em> PRAISE (LLaMa models through Meta) assigning SNOMED based morphology and topography for a given colon pathology report</em></p>
 
@@ -77,12 +77,12 @@ Once the model is running, you can proceed with SNOMED coding for morphology and
 ![screenshot](Images/PRW_ollama.png)
 <p align="center"><em> PRAISE (LLaMa models through Ollama) assigning SNOMED based morphology and topography for a given colon pathology report</em></p>
 
-# PRAISE-ERAG
-This approach is designed to complement PRAISE when users need to work with smaller LLMs that have a token limit of less than 4096, ensuring efficient processing without compromising coding accuracy. The working of ERAG is shown in the Figure.
+# PRISM-RAG
+This approach is designed to complement PRISM when users need to work with smaller LLMs that have a token limit of less than 4096, ensuring efficient processing without compromising coding accuracy. The working of RAG is shown in the Figure.
 <p align="center">
   <img src="Images/ERAG.png" alt="ERAG based SNOMED coding" width="500">
 </p>
-<p align="center"><em> ERAG based SNOMED coding </em></p>
+<p align="center"><em> RAG based SNOMED coding </em></p>
 
 In the same manner as PRISM, this approach is also handled in two ways, divided by  the nature of the LlaMa models:  models provided by Meta, and  models deployed via Ollama
 
@@ -103,9 +103,9 @@ python3 /app/RAG_ollama.py
 ```
 ``--network host`` allows the container to use the host’s network directly, eliminating the need for manual port mapping. It ensures low-latency communication between the PRISM-RAG container and the container where LLaMa is running, making interactions faster and more efficient. ``-v /var/run/docker.sock:/var/run/docker.sock``  mounts the host’s Docker socket inside the container, allowing the container to interact with and control other running Docker containers. It enables PRAISE_RAG to execute commands within the container where LLaMa is running, facilitating seamless model invocation without requiring external API calls. ``-v $(which docker):/usr/bin/docker`` mounts the Docker CLI inside PRISM-RAG, ensuring it can run Docker commands without installing Docker within the container.
 
-The response of ERAG is provided in the following figure. From the figure, it can be seen that the LLM has been called multiple times to assign appropriate SNOMED codes for the given pahtology report. 
+The response of RAG is provided in the following figure. From the figure, it can be seen that the LLM has been called multiple times to assign appropriate SNOMED codes for the given pahtology report. 
 ![screenshot](Images/ERAG_Ollama.png)
-<p align="center"><em> Step-wise response of ERAG for a given pathology report </em></p>
+<p align="center"><em> Step-wise response of RAG for a given pathology report </em></p>
 
 ## RAG-based SNOMED Coding with models provided by Meta
 This is the same as PRISM where LLama models are deployed directly from the meta website. The docker file  and script are provided in /ERAG/RAG_meta/. 
