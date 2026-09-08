@@ -77,7 +77,7 @@ Once the model is running, you can proceed with SNOMED coding for morphology and
 ![screenshot](Images/PRW_ollama.png)
 <p align="center"><em> PRAISE (LLaMa models through Ollama) assigning SNOMED based morphology and topography for a given colon pathology report</em></p>
 
-# PRISM-RAG
+# PRISM-RAG (ERAG)
 This approach is designed to complement PRISM when users need to work with smaller LLMs that have a token limit of less than 4096, ensuring efficient processing without compromising coding accuracy. The working of RAG is shown in the Figure.
 <p align="center">
   <img src="Images/ERAG.png" alt="ERAG based SNOMED coding" width="500">
