@@ -134,7 +134,7 @@ For supervised fine-tuning, **17 LLMs** were evaluated on the same colorectal SN
 
 Three inference protocols were used for evaluation: **Strict Raw Generation (SRG)**, **Relaxed First-Five-Digit Extraction (RFE)**, and **Prefix-Constrained Decoding (PCD)**, allowing evaluation under increasingly controlled code-generation settings.
 
-![screenshot](Images/Supervised.png)
+![screenshot](Images/supervised_1.png)
 
 The best supervised results reached approximately **87.86% SNOM accuracy** and **85.16% SNOT accuracy**, depending on the model and evaluation protocol. However, when compared with the corresponding models evaluated using PRISM, PRISM generally achieved stronger performance, showing that structured prompt refinement remained highly competitive without task-specific parameter updates.
 
