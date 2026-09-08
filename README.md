@@ -109,3 +109,16 @@ The response of RAG is provided in the following figure. From the figure, it can
 
 ## RAG-based SNOMED Coding with models provided by Meta
 This is the same as PRISM where LLama models are deployed directly from the meta website. The docker file  and script are provided in /ERAG/RAG_meta/. 
+
+# Results
+## PIRSM Evaluation
+PRISM was evaluated across **15 open-weight LLMs**, covering both general-purpose and medical-domain model families across a wide range of model sizes. The evaluated models included **LLaMA-3 and LLaMA-3.1 variants, Mistral-Nemo-12B, Gemma-2-27B, Phi-4, MedGemma-27B, BioMistral-7B, Apertus-70B-MeditronFO, and LLaMA-3.1-405B**.
+
+As shown in the performance comparison below, **LLaMA-3.1-405B** achieved the best overall performance, reaching **95.13% accuracy, 94.97% weighted F1, and 64.22% Macro-F1 for SNOM**, and **90.33% accuracy, 91.37% weighted F1, and 82.85% Macro-F1 for SNOT**.
+
+![screenshot](Images/PRISM_full_stage.png)
+
+Among the medical-domain models, **Apertus-70B-MeditronFO** performed best, achieving **90.45% accuracy, 92.10% weighted F1, and 62.24% Macro-F1 for SNOM**, together with **87.15% accuracy, 88.22% weighted F1, and 78.66% Macro-F1 for SNOT**.
+
+Overall, the results show that PRISM performs consistently across different LLM families. **LLaMA-3.1-405B** achieved the strongest overall performance, while **Apertus-70B-MeditronFO** was the best-performing medical-domain model.
+
