@@ -140,12 +140,13 @@ The best supervised results reached approximately **87.86% SNOM accuracy** and *
 
 ## Cross-Disease Transferability
 
-For **cross-disease transferability**, the PRISM framework developed on colorectal pathology was adapted to a **prostate pathology dataset of 2,905 reports** without creating a separate prostate-specific prompt-development set.
+For **cross-disease transferability**, the PRISM framework developed on colorectal pathology was adapted to a **prostate pathology dataset of 2,903 reports** without creating a separate prostate-specific prompt-development set.
 
 Across **LLaMA-3-70B, LLaMA-3.1-70B, and LLaMA-3.1-405B**, performance improved substantially from Phase I to the later PRISM phases, showing that the structured refinement process remained effective when transferred to a different pathology domain.
 
 ![screenshot](Images/Prostate_1.png)
 
-The best-performing model, **LLaMA-3.1-405B**, achieved **94.46% weighted F1 and 73.26% Macro-F1 for SNOM**, together with **99.97% weighted F1 and 99.98% Macro-F1 for SNOT**.
+The best-performing model, **LLaMA-3.1-405B**, achieved **94.46% weighted F1 and 73.26% Macro-F1 for SNOM**, together with **99.96% weighted F1 for SNOT**.
 
 Overall, the results indicate that PRISM can be transferred beyond colorectal pathology by adapting the disease-specific coding space, without rebuilding the complete prompt-refinement process from scratch.
+
