@@ -144,7 +144,7 @@ For **cross-disease transferability**, the PRISM framework developed on colorect
 
 Across **LLaMA-3-70B, LLaMA-3.1-70B, and LLaMA-3.1-405B**, performance improved substantially from Phase I to the later PRISM phases, showing that the structured refinement process remained effective when transferred to a different pathology domain.
 
-![screenshot](Images/Prostate.png)
+![screenshot](Images/Prostate_1.png)
 
 The best-performing model, **LLaMA-3.1-405B**, achieved **94.46% weighted F1 and 73.26% Macro-F1 for SNOM**, together with **99.97% weighted F1 and 99.98% Macro-F1 for SNOT**.
 
