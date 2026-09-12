@@ -128,15 +128,7 @@ For **PRISM-RAG**, three LLaMA-2 models were evaluated across different retrieva
 ![screenshot](Images/PRISM_RAG.png)
 
 
-## Supervised Fine-Tuning Evaluation
 
-For supervised fine-tuning, **17 LLMs** were evaluated on the same colorectal SNOMED coding task using QLoRA. **LLaMA-3.1-405B** was excluded because supervised adaptation at the 405B scale was not feasible within the available **8×A100 40 GB GPU** memory, although it could still be used for quantized inference with PRISM.
-
-Three inference protocols were used for evaluation: **Strict Raw Generation (SRG)**, **Relaxed First-Five-Digit Extraction (RFE)**, and **Prefix-Constrained Decoding (PCD)**, allowing evaluation under increasingly controlled code-generation settings.
-
-![screenshot](Images/supervised_1.png)
-
-The best supervised results reached approximately **87.86% SNOM accuracy** and **85.16% SNOT accuracy**, depending on the model and evaluation protocol. However, when compared with the corresponding models evaluated using PRISM, PRISM generally achieved stronger performance, showing that structured prompt refinement remained highly competitive without task-specific parameter updates.
 
 ## Cross-Disease Transferability
 
