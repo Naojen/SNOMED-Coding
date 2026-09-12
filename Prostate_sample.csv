@@ -1,0 +1,93 @@
+﻿Pathology Report,Tcode,Mcode
+"Pathologic diagnosis:
+1. Prostate, right peripheral, TRUS biopsy --- Adenocarcinoma,
+Gleason's score: 3+3=6 (1/4, 1%).
+2. Prostate, right parasagittal, TRUS biopsy --- Adenocarcinoma,
+Gleason's score: 3+3=6 (1/5, 3%).
+3. Prostate, left peripheral, TRUS biopsy --- Adenocarcinoma,
+Gleason's score: 3+3=6 (1/4, 3%).
+4. Prostate, left parasagittal, TRUS biopsy --- Adenocarcinoma,
+Gleason's score: 3+4=7 (3/4, 30%).
+
+Prognostic and predictive factor:
+Perineural invasion: Absent.
+
+Gross description:
+The specimen consists of 1) 4 strips of gray white soft tissue, up
+to 1.6x0.1x0.1 cm, labeled as ""right peripheral"". 2) 5 strips of gray
+white soft tissue, up to 1.5x0.1x0.1 cm, labeled as ""right
+parasagittal"". 3) 4 strips of gray white soft tissue, up to
+1.2x0.1x0.1 cm, labeled as ""left peripheral"". 4) 5 strips of gray
+white soft tissue, up to 1.1x0.1x0.1 cm, labeled as ""left
+parasagittal"". All for section: A) specimen 1 B) specimen 2 C)
+specimen 3 D) specimen 4.
+
+Microscopic description:
+Sections show prostate tissue with small atypical distorted glands
+infiltration with variation in size and shape. Some ill-defined
+glands with poorly-formed glandular lumina are also seen.
+
+Note:
+1. This case has been peer reviewed by two doctors.
+2. The diagnosis is concurred in intradepartment consensus meeting
+on 2017/03/22.
+#T-77100 #M-81403 4 1143 00CM0F",77100,81403
+"Pathologic diagnosis:
+1. Prostate, apex, right, excision --- Adenocarcinoma, Gleason's
+score: 3+3=6.
+2. Prostate, apex, left, excision --- Unremarkable.
+3. Seminal vesicle, right, excision --- Unremarkable.
+4. Soft tissue, pre-prostate, dissection --- Unremarkable
+fibroadipose tissue.
+5. Prostate and bilateral seminal vesicles, retropubic radical
+prostatectomy --- a. Adenocarcinoma, Gleason's score: 3+4=7, of both
+lobes. Tumor confined to the prostate. The prostatic urethra,
+bilateral bladder necks, seminal vesicles and peri-prostatic and
+peri-seminal vesicular soft tissue margin are free of tumor. b. High
+grade prostatic intraepithelial neoplasia, multifoci.
+6. Lymph node, right obturator, dissection --- Unremarkable (0/3).
+7. Lymph node, left obturator, dissection --- Unremarkable (0/5).
+
+Prognostic and predictive factor:
+1. Tumor amount: 20% of prostatic bulk. Tumor size in dominant
+nodule greatest dimension: 13 mm.
+2. Multicentricity: Present.
+3. Extraprostatic soft tissue extension: Not identified.
+4. Seminal vesicle invasion (invasion of muscular wall required):
+Not identified.
+5. Margins other than apex and bladder neck: Uninvolved (less than 1
+mm with intact capsule or fascia).
+6. Margins of apex and bladder neck: Cannot be well evaluated due to
+separated specimen.
+7. Perineural invasion: Present.
+8. Angiolymphatic invasion: Not identified.
+9. Treatment effect on carcinoma: Not applicable.
+10. Pathological TNM stage: pT2cN0 (According to the seventh
+edition, 2010, American Joint Committee on Cancer Staging Guidelines
+for Tumors / 2012 CAP guideline).  
+11. TNM descriptors: Not applicable.
+
+Gross description:
+The specimen consists of 1) 3 pieces of tan soft tissue, up to
+0.6x0.2x0.1 cm, labeled as ""right apex"". 2) 2 pieces of tan soft
+tissue, up to 0.6x0.5x0.3 cm, labeled as ""left apex"". 3) a piece of
+tan soft tissue, 0.8x0.4x0.1 cm, labeled as ""right SV"". 4) a piece of
+yellow soft tissue, 1.8x1.2x0.3 cm, labeled as ""pre-prostate soft
+tissue"". 5) a piece of prostatic tissue and bilateral seminal
+vesicles, 40 gm totally, with prostate, 4.3x3.1x3 cm, right seminal
+vesicle, 2.6x1.5x1 cm, and left seminal vesicle, 3x1.6x1.1 cm, with
+green dye marked for the right lobe. Multiple spherical, yellowish,
+variable-sized nodules are found on the cut surfaces. 6) a piece of
+yellow soft tissue, 2.5x2.3x0.5 cm, labeled as ""right obturator lymph
+nodes"". 7) a piece of yellow soft tissue, 4.8x2.1x0.7 cm, labeled as
+""left obturator lymph nodes"". All for section: A-D) sp.1-4 E) sp.6
+F-G) sp.7 H-J) right seminal vesicle and vas deferens K-L) left
+seminal vesicle and vas deferens M) right bladder neck N) left
+bladder neck P-U) whole mount of prostate.
+
+Note:
+This case has been peer reviewed by two doctors.
+#T-77100 #M-81403 4 1120 000000
+#T-77500 #M-09450 0 1120 000000
+#T-75000 #M-09450 0 1120 000000
+#T-08600 #M-09450 0 1120 000000",77100,81403
