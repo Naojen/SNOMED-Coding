@@ -225,7 +225,7 @@ CONTAINER_NAME = "ollama"
 # LLaMA-3.1-70B     -> llama3.1:70b
 # LLaMA-3.1-405B    -> llama3.1:405b
 #
-MODEL_NAME = "llama3.1:70b"
+MODEL_NAME = "llama3.1:405b"
 
 
 # ============================================================
