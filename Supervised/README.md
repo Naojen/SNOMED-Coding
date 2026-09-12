@@ -180,7 +180,7 @@ Each evaluation script produces:
 
 Malformed outputs are represented internally by a non-clinical invalid label. This label ensures that malformed generations are counted as errors but is excluded from the set of genuine SNOMED classes used to calculate macro-F1.
 
-![screenshot](Images/supervised_1.png)
+![screenshot](../Images/supervised_1.png)
 
 The best supervised results reached approximately **87.86% SNOM accuracy** and **85.16% SNOT accuracy**, depending on the model and evaluation protocol. However, when compared with the corresponding models evaluated using PRISM, PRISM generally achieved stronger performance, showing that structured prompt refinement remained highly competitive without task-specific parameter updates.
 
